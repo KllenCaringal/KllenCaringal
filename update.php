@@ -1,7 +1,6 @@
 <?php
 include 'db.php';
 
-// Handle form submission for updating the product
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
@@ -9,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
 
-    // Update the product in the database
     $sql = "UPDATE products SET
                 name = '$name',
                 description = '$description',
@@ -19,19 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
             WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: index.php");  // Redirect to the main page on success
+        header("Location: index.php");  
         exit;
     } else {
         echo "Error updating record: " . $conn->error;
     }
 } else if (isset($_GET['id'])) {
-    // Fetch the product details based on the ID from the URL
     $id = $_GET['id'];
     $sql = "SELECT * FROM products WHERE id='$id'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();  // Get the product data
+        $row = $result->fetch_assoc();  
     } else {
         echo "No record found!";
         exit;
