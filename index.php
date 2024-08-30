@@ -1,7 +1,6 @@
 <?php
 include 'db.php';
 
-// Handle form submission for adding a new product
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $description = $_POST['description'];
@@ -12,14 +11,13 @@ if (isset($_POST['submit'])) {
             VALUES ('$name', '$description', '$price', '$quantity', NOW())";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: " . $_SERVER['PHP_SELF']);  // Refresh the page
+        header("Location: " . $_SERVER['PHP_SELF']); 
         exit;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 
-// Fetch all products
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);
 ?>
